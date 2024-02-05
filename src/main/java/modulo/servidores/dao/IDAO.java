@@ -1,17 +1,19 @@
 package modulo.servidores.dao;
 
+import modulo.servidores.entity.Employees;
+
 import java.util.List;
 
 public abstract interface IDAO<T> {
-    void getById() throws SQLExceptionDAO;
+    Employees getById(int id) throws ExceptionDAO;
+    List<T> getByCpf(String cpf) throws ExceptionDAO;
+    void delete(int id) throws ExceptionDAO;
 
-    int delete(int id) throws SQLExceptionDAO;
+    void save(T t) throws ExceptionDAO;
 
-    int save(T t) throws SQLExceptionDAO;
+    void update(T t) throws ExceptionDAO;
 
-    int update(T t) throws SQLExceptionDAO;
+    List<T> getAll() throws ExceptionDAO;
 
-    List<T> getAll() throws SQLExceptionDAO;
-
-    List<T> getByValue(String value) throws SQLExceptionDAO;
+    List<T> getByValue(String value) throws ExceptionDAO;
 }
