@@ -1,4 +1,4 @@
-package modulo.servidores.dao;
+package modulo.servidores.Dao;
 
 public class ExceptionDAO extends Exception {
 

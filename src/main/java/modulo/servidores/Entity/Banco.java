@@ -1,4 +1,4 @@
-package modulo.servidores.entity;
+package modulo.servidores.Entity;
 
 import lombok.Data;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Banco {
-    private Integer id;
+    private Long id;
     private String nome;
     private int agencia;
     private int conta;
@@ -18,7 +18,7 @@ public class Banco {
     public Banco() {
     }
 
-    public Banco(int id, String nome, int agencia, int conta, double salario) {
+    public Banco(Long id, String nome, int agencia, int conta, double salario) {
         this.id = id;
         this.nome = nome;
         this.agencia = agencia;

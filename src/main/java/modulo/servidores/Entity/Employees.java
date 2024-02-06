@@ -1,4 +1,4 @@
-package modulo.servidores.entity;
+package modulo.servidores.Entity;
 
 
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Employees {
-    private Integer id;
+    private Long id;
     private String nome;
     private String cpf;
     private String telefone;
@@ -37,7 +37,7 @@ public class Employees {
         this.cidade = cidade;
         this.cep = cep;
     }
-    public Employees(int id, String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep) {
+    public Employees(Long id, String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -53,11 +53,11 @@ public class Employees {
         this.cep = cep;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
