@@ -1,9 +1,15 @@
 package modulo.servidores.Entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
+
 
 public class Employees {
     private Long id;
@@ -20,6 +26,7 @@ public class Employees {
     private String cidade;
     private String cep;
     private ArrayList<Banco> conta_bancaria = new ArrayList<>();
+
 
     public Employees() {
     }

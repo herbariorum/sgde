@@ -4,15 +4,15 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import modulo.servidores.Entity.Estados;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class PanelFormEmployee extends javax.swing.JPanel{
     public JTextField txtNome, txtCargo, txtLogradouro, txtNumero, txtComplemento, txtBairro, txtBanco, txtAgencia, txtConta;
     public JFormattedTextField txtCpf, txtTelefone, txtDtaNasc, txtCep, txtSalario;
-    public JComboBox cbxCidade, cbxEstado;
-
+    public JComboBox cbxCidade;
+    public JComboBox<Object> cbxEstado;
     public PanelFormEmployee(){
         FormLayout layout = new FormLayout(
                 "150px, 4dlu,100px, 4dlu,100px, 4dlu,100px, 4dlu, 130px",
@@ -102,7 +102,7 @@ public class PanelFormEmployee extends javax.swing.JPanel{
 
         JLabel labelUf = new JLabel("Estado");
         builder.add(labelUf, cc.xy(1, 28));
-        cbxEstado = new JComboBox();
+        cbxEstado = new JComboBox<>();
         builder.add(cbxEstado, cc.xy(1, 30));
 
         JLabel labelCidade = new JLabel("Cidade");

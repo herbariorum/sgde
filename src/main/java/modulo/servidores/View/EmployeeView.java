@@ -2,13 +2,18 @@ package modulo.servidores.View;
 
 import FormModel.FormPadrao;
 import FormModel.Fragmentos.PanelFormEmployee;
-import FormModel.Fragmentos.PanelTable;
-import FormModel.Fragmentos.PanelTitle;
 import modulo.servidores.Controller.EmployeeController;
+import modulo.servidores.Controller.EstadoController;
+import modulo.servidores.Controller.MunicipioController;
+import modulo.servidores.DAOImpl.EstadoDAO;
+import modulo.servidores.DAOImpl.MunicipioDAO;
 import modulo.servidores.Dao.ExceptionDAO;
 import modulo.servidores.Entity.Employees;
+import modulo.servidores.Entity.Estados;
+import modulo.servidores.Entity.Municipios;
 import modulo.servidores.View.config.EmployeeCellRenderer;
 import modulo.servidores.View.config.EmployeeTableModel;
+import util.ComboBoxList;
 import util.Util;
 
 import javax.swing.*;
@@ -16,17 +21,24 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 public class EmployeeView extends FormPadrao {
     private EmployeeController controller;
+    private EstadoController estadoController;
+    private MunicipioController municipioController;
     private PanelFormEmployee panelFormEmployee;
+    private final EstadoDAO estadoDAO = new EstadoDAO();
+    private final MunicipioDAO municipioDAO = new MunicipioDAO();
     private Long idRow;
 
-    public EmployeeView(String titulo) throws ExceptionDAO {
-        super(titulo);
+    public EmployeeView(JFrame parent, boolean modal, String titulo) throws ExceptionDAO {
+        super(parent, modal, titulo);
         setUndecorated(true);
+
+        this.municipioController = new MunicipioController();
+
         this.panelFormEmployee = new PanelFormEmployee();
         this.formulario.add(this.panelFormEmployee);
 
@@ -47,7 +59,7 @@ public class EmployeeView extends FormPadrao {
             formatMoney.install(panelFormEmployee.txtSalario);
             var formatCep = new MaskFormatter("##.###-###");
             formatCep.install(panelFormEmployee.txtCep);
-        }catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         panelTable.txtLocalizar.addKeyListener(new KeyAdapter() {
@@ -55,7 +67,7 @@ public class EmployeeView extends FormPadrao {
             public void keyTyped(KeyEvent e) {
                 try {
                     preencherTabela(panelTable.txtLocalizar.getText());
-                }catch (ExceptionDAO ex){
+                } catch (ExceptionDAO ex) {
                     ex.printStackTrace();
                 }
             }
@@ -68,7 +80,7 @@ public class EmployeeView extends FormPadrao {
                     habilitarCampos(true);
                     habilitarBotoes(false);
                     abas.setSelectedIndex(0);
-                }catch (ExceptionDAO ex){
+                } catch (ExceptionDAO ex) {
                     ex.printStackTrace();
                 }
             }
@@ -76,13 +88,21 @@ public class EmployeeView extends FormPadrao {
         panelButton.btnNovo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                adicionarAction();
+                try {
+                    adicionarAction();
+                } catch (ExceptionDAO e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         panelButton.btnCancela.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                cancelAction();
+                try {
+                    cancelAction();
+                } catch (ExceptionDAO e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         panelButton.btnSalva.addActionListener(new ActionListener() {
@@ -97,21 +117,21 @@ public class EmployeeView extends FormPadrao {
                 deleteDoBD();
             }
         });
-        abas.addMouseListener(new MouseAdapter() {
+
+
+        panelFormEmployee.cbxEstado.addItemListener(new ItemListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                JTabbedPane sourceTabbledPane = (JTabbedPane) e.getSource();
-                int index = sourceTabbledPane.getSelectedIndex();
-                if (index == 1){
-                    cancelAction();
-                }else if (index == 0){
-                    adicionarAction();
+            public void itemStateChanged(ItemEvent e) {
+                try {
+                    preencherComboCidade();
+                } catch (ExceptionDAO ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
     }
 
-    private void adicionarAction(){
+    private void adicionarAction() throws ExceptionDAO {
         limparCampos();
         habilitarBotoes(false);
         habilitarCampos(true);
@@ -121,7 +141,7 @@ public class EmployeeView extends FormPadrao {
         if (abas.getSelectedIndex() != 0) abas.setSelectedIndex(0);
     }
 
-    private void cancelAction(){
+    private void cancelAction() throws ExceptionDAO {
         limparCampos();
         habilitarBotoes(true);
         habilitarCampos(false);
@@ -131,11 +151,6 @@ public class EmployeeView extends FormPadrao {
         if (abas.getSelectedIndex() != 1) abas.setSelectedIndex(1);
     }
 
-    private void preencherComboEstado() {
-    }
-
-    private void preencherComboCidade() {
-    }
 
     @Override
     public void limparCampos() {
@@ -205,8 +220,30 @@ public class EmployeeView extends FormPadrao {
             panelFormEmployee.txtComplemento.setText(employee.getComplemento());
             panelFormEmployee.txtBairro.setText(employee.getBairro());
             panelFormEmployee.txtCep.setText(employee.getCep());
-            panelFormEmployee.cbxCidade.setSelectedItem(employee.getCidade());
-            panelFormEmployee.cbxEstado.setSelectedItem(employee.getEstado());
+            panelFormEmployee.cbxEstado.getModel().setSelectedItem(employee.getEstado());
+            panelFormEmployee.cbxCidade.getModel().setSelectedItem(employee.getCidade());
+
+        }
+    }
+
+    private void preencherComboEstado() throws ExceptionDAO {
+        estadoDAO.comboBoxEstado();
+        panelFormEmployee.cbxEstado.removeAllItems();
+        for (ComboBoxList c : estadoDAO.getList()) {
+            panelFormEmployee.cbxEstado.addItem(c);
+        }
+    }
+
+    private void preencherComboCidade() throws ExceptionDAO {
+        String uf = String.valueOf(panelFormEmployee.cbxEstado.getModel().getSelectedItem());
+        estadoController = new EstadoController();
+        Estados estado = estadoController.findByName(uf);
+        if (estado.getId() != null){
+         List<Municipios> municipiosList = this.municipioController.getByCodigoUf(estado.getId());
+            panelFormEmployee.cbxCidade.removeAllItems();
+            for (Municipios m : municipiosList){
+                panelFormEmployee.cbxCidade.addItem(m.getNome());
+            }
         }
     }
 
@@ -258,6 +295,10 @@ public class EmployeeView extends FormPadrao {
 //            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 //        }
 //    }
+    public javax.swing.JDialog getInstance() {
+        return this;
+    }
+
     public void start() {
         setVisible(true);
     }

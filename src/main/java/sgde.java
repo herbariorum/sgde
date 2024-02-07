@@ -6,6 +6,6 @@ public class sgde {
     public static void main(String[] args) throws ExceptionDAO {
         FlatLightLaf.setup();
 
-        new EmployeeView("Manutenção de Servidores").start();
+        new MenuForm().start();
     }
 }

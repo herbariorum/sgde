@@ -32,7 +32,7 @@ public class TesteConexao {
     public void buscaPorId() throws ExceptionDAO {
         var controller = new EmployeeController();
         try {
-            System.out.println(controller.buscaPorId(1));
+            System.out.println(controller.buscaPorId(1L));
         } catch (ExceptionDAO e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -50,7 +50,7 @@ public class TesteConexao {
     public void delete() throws ExceptionDAO {
         var controller = new EmployeeController();
         try {
-            System.out.println(controller.deleteEmployees(11));
+            System.out.println(controller.deleteEmployees(11L));
         } catch (ExceptionDAO e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -58,7 +58,7 @@ public class TesteConexao {
 
     public static void main(String[] args) throws ExceptionDAO {
         TesteConexao t = new TesteConexao();
-        t.delete();
+        t.inserir();
 //        var sqlDb = "USE sgde;";
 //        var sqlTable = "CREATE TABLE employees (\n" +
 //                "id serial primary key not null,\n" +

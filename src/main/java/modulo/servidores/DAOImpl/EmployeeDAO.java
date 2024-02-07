@@ -49,7 +49,6 @@ public class EmployeeDAO implements IDAO<Employees> {
         return employee;
     }
 
-    @Override
     public List<Employees> getByCpf(String cpf) throws ExceptionDAO {
         List<Employees> employees = new ArrayList<>();
         try (Connection connection = DB.getConexao(); PreparedStatement stmt = connection.prepareStatement(sqlBuscaPorCpf);) {

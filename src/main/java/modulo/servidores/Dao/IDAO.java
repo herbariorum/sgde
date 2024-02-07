@@ -5,8 +5,7 @@ import modulo.servidores.Entity.Employees;
 import java.util.List;
 
 public abstract interface IDAO<T> {
-    Employees getById(Long id) throws ExceptionDAO;
-    List<T> getByCpf(String cpf) throws ExceptionDAO;
+    T getById(Long id) throws ExceptionDAO;
     int delete(Long id) throws ExceptionDAO;
 
     int save(T t) throws ExceptionDAO;

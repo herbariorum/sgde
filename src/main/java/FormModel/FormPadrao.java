@@ -27,8 +27,8 @@ abstract public class FormPadrao extends javax.swing.JDialog{
     public JPanel formulario;
     public JTabbedPane abas ;
 
-    public FormPadrao(String titulo){
-        super();
+    public FormPadrao(JFrame parent, boolean modal, String titulo){
+        super(parent, modal);
         Container container = getContentPane();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.titulo = titulo;
