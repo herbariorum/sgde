@@ -1,13 +1,13 @@
 package modulo.servidores.Controller;
 
 import modulo.servidores.DAOImpl.EmployeeDAO;
-import modulo.servidores.Dao.ExceptionDAO;
+import Database.Dao.ExceptionDAO;
+import modulo.servidores.Entity.Banco;
 import modulo.servidores.Entity.Employees;
 import util.CPF;
 import util.DateValidatorUsingIDateFormat;
 import util.IDateValidator;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +22,35 @@ public class EmployeeController {
     }
     public boolean adicionaEmploees(Long id, String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc,
                                  String logradouro, String numero, String complemento, String bairro, String cidade,
-                                 String estado, String cep) throws ExceptionDAO {
+                                 String estado, String cep, Long idBanco, String nomeBanco, String agencia, String conta,
+                                    Double salario, Long employee_id) throws ExceptionDAO {
 
         employeeDAO = new EmployeeDAO();
         cpfVal = new CPF(cpf);
+
+        ArrayList<Banco> listaBancos = new ArrayList<>();
         if (nome != null && nome.length() > 5 &&
                 cpfVal.isCPF() && telefone != null &&
                 cargo != null &&
-                validator.isValid(dta_nasc.toString()) && logradouro != null) {
+                validator.isValid(dta_nasc.toString()) &&
+                logradouro != null &&
+                nomeBanco != null &&
+                agencia != null &&
+                conta != null) {
             try {
+
                 if (id == null) {
-                    employees = new Employees(nome, cpf, telefone, cargo, dta_nasc, logradouro, numero, complemento, bairro, cidade, estado, cep);
+                    Banco banco = new Banco(nomeBanco, agencia, conta, salario, employee_id);
+                    listaBancos.add(banco);
+                    employees = new Employees(nome, cpf, telefone, cargo, dta_nasc, logradouro, numero, complemento, bairro, estado, cidade, cep, listaBancos);
                     int idReturn = employeeDAO.save(employees);
                     if (idReturn > 0) {
                         return true;
                     }
                 } else {
-                    employees = new Employees(id, nome, cpf, telefone, cargo, dta_nasc, logradouro, numero, complemento, bairro, cidade, estado, cep);
+                    Banco banco = new Banco(idBanco, nomeBanco, agencia, conta, salario, employee_id);
+                    listaBancos.add(banco);
+                    employees = new Employees(id, nome, cpf, telefone, cargo, dta_nasc, logradouro, numero, complemento, bairro, estado, cidade, cep, listaBancos);
                     int idReturn = employeeDAO.update(employees);
                     if (idReturn > 0) {
                         return true;

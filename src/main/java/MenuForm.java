@@ -1,10 +1,10 @@
-import modulo.servidores.Dao.ExceptionDAO;
+import Database.Dao.ExceptionDAO;
+import modulo.servidores.View.BancoCadView;
 import modulo.servidores.View.EmployeeView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -49,18 +49,33 @@ public class MenuForm extends JFrame {
         cadastroEstudantes.addActionListener((ActionEvent e) -> {
             cadastraEstudantesAction();
         });
-        JMenuItem cadastroServidores = new JMenuItem("Cadastro de Funcionários");
-        cadastroServidores.addActionListener((ActionEvent e) -> {
+//        JMenu funcionarios = new JMenu("Funcionários");
+
+        JMenuItem cadastroFuncionarios = new JMenuItem("Cadastro de Funcionários");
+        cadastroFuncionarios.addActionListener((ActionEvent e) -> {
             try {
                 cadastroServidoresAction();
             } catch (ExceptionDAO ex) {
                 throw new RuntimeException(ex);
             }
         });
+//        JMenuItem cadastroContas = new JMenuItem("Cadastro de Contas Bancárias");
+//        cadastroContas.addActionListener((ActionEvent e) -> {
+//
+//            try {
+//                cadastroContasAction();
+//            } catch (ExceptionDAO ex) {
+//                throw new RuntimeException(ex);
+//            }
+//
+//        });
+
+//        funcionarios.add(cadastroFuncionarios);
+//        funcionarios.add(cadastroContas);
 
 
         cadastroMenu.add(cadastroEstudantes);
-        cadastroMenu.add(cadastroServidores);
+        cadastroMenu.add(cadastroFuncionarios);
 
         menuBar.add(fileMenu);
         menuBar.add(cadastroMenu);
@@ -75,6 +90,10 @@ public class MenuForm extends JFrame {
     }
     private void cadastroServidoresAction() throws ExceptionDAO {
         new EmployeeView(getInstance(), true, "Cadastro de Funcionários").start();
+    }
+
+    private void cadastroContasAction() throws ExceptionDAO {
+        new BancoCadView(getInstance(), true, "Cadastro de Contas").start();
     }
     private void sairDoApp() {
         int resposta = JOptionPane.showConfirmDialog(null, "Você deseja realmente sair?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

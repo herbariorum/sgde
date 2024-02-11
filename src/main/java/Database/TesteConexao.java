@@ -1,31 +1,29 @@
 package Database;
 
 import modulo.servidores.Controller.EmployeeController;
-import modulo.servidores.Dao.ExceptionDAO;
+import Database.Dao.ExceptionDAO;
 
 import javax.swing.*;
-import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class TesteConexao {
 
     public void inserir() throws ExceptionDAO {
         boolean sucesso;
         var controller = new EmployeeController();
-        try {
-            sucesso = controller.adicionaEmploees(null,
-                    "Wanderson", "77920207037", "63991111196", "Professor",
-                    LocalDate.now(), "Rua Presidente", "21", "", "Centro",
-                    "Areia", "Paraíba", "77960000"
-            );
-            if (sucesso) {
-                JOptionPane.showMessageDialog(null, "O Registro foi cadastrado/atualizado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Preencha os campos corretamente.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (ExceptionDAO e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+//        try {
+//            sucesso = controller.adicionaEmploees(null,
+//                    "Wanderson", "77920207037", "63991111196", "Professor",
+//                    LocalDate.now(), "Rua Presidente", "21", "", "Centro",
+//                    "Areia", "Paraíba", "77960000"
+//            );
+//            if (sucesso) {
+//                JOptionPane.showMessageDialog(null, "O Registro foi cadastrado/atualizado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Preencha os campos corretamente.", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        } catch (ExceptionDAO e) {
+//            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
     }
 
 

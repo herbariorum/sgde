@@ -21,14 +21,7 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms -->
+           <!-- https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms -->
         <dependency>
             <groupId>com.jgoodies</groupId>
             <artifactId>jgoodies-forms</artifactId>
@@ -60,6 +53,13 @@
             <version>${flatlafVersion}</version>
             <type>jar</type>
         </dependency>
-
+        <dependency>
+            <groupId>raven.toast</groupId>
+            <artifactId>swing-toast-notifications</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/library/swing-toast-notifications-1.0.1.jar</systemPath>
+        </dependency>
     </dependencies>
+
 </project>

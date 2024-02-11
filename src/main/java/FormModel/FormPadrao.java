@@ -4,7 +4,7 @@ import FormModel.Fragmentos.PanelButton;
 import FormModel.Fragmentos.PanelFormEmployee;
 import FormModel.Fragmentos.PanelTable;
 import FormModel.Fragmentos.PanelTitle;
-import modulo.servidores.Dao.ExceptionDAO;
+import Database.Dao.ExceptionDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ abstract public class FormPadrao extends javax.swing.JDialog{
     abstract public void preencherFormulario() throws ExceptionDAO;
     abstract public void preencherTabela(String valor) throws ExceptionDAO;
     abstract public void salvarNoBD();
-    abstract public void deleteDoBD();
+    abstract public void deleteDoBD() throws ExceptionDAO;
 
     public PanelTitle panelTitle;
     public PanelFormEmployee panelForm;
@@ -32,6 +32,8 @@ abstract public class FormPadrao extends javax.swing.JDialog{
         Container container = getContentPane();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.titulo = titulo;
+
+
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 

@@ -1,10 +1,9 @@
 package modulo.servidores.DAOImpl;
 
 import Database.DB;
-import lombok.Getter;
-import lombok.Setter;
-import modulo.servidores.Dao.ExceptionDAO;
-import modulo.servidores.Dao.IDAO;
+
+import Database.Dao.ExceptionDAO;
+import Database.Dao.IDAO;
 import modulo.servidores.Entity.Estados;
 import util.ComboBoxList;
 

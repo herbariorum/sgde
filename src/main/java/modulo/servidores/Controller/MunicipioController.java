@@ -1,9 +1,7 @@
 package modulo.servidores.Controller;
 
-import modulo.servidores.DAOImpl.EstadoDAO;
 import modulo.servidores.DAOImpl.MunicipioDAO;
-import modulo.servidores.Dao.ExceptionDAO;
-import modulo.servidores.Entity.Estados;
+import Database.Dao.ExceptionDAO;
 import modulo.servidores.Entity.Municipios;
 
 import java.util.List;

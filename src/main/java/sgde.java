@@ -1,6 +1,5 @@
 import com.formdev.flatlaf.FlatLightLaf;
-import modulo.servidores.Dao.ExceptionDAO;
-import modulo.servidores.View.EmployeeView;
+import Database.Dao.ExceptionDAO;
 
 public class sgde {
     public static void main(String[] args) throws ExceptionDAO {

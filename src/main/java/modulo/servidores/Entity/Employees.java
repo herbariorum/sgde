@@ -1,11 +1,6 @@
 package modulo.servidores.Entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -30,7 +25,7 @@ public class Employees {
 
     public Employees() {
     }
-    public Employees(String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep) {
+    public Employees(String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep, ArrayList<Banco> conta_bancaria) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -43,8 +38,9 @@ public class Employees {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
+        this.conta_bancaria = conta_bancaria;
     }
-    public Employees(Long id, String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep) {
+    public Employees(Long id, String nome, String cpf, String telefone, String cargo, LocalDate dta_nasc, String logradouro, String numero, String complemento, String bairro, String estado, String cidade, String cep, ArrayList<Banco> conta_bancaria) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -58,6 +54,7 @@ public class Employees {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
+        this.conta_bancaria = conta_bancaria;
     }
 
     public Long getId() {

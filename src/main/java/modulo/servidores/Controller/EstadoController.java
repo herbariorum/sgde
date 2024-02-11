@@ -1,12 +1,9 @@
 package modulo.servidores.Controller;
 
-import modulo.servidores.DAOImpl.EmployeeDAO;
 import modulo.servidores.DAOImpl.EstadoDAO;
-import modulo.servidores.Dao.ExceptionDAO;
-import modulo.servidores.Entity.Employees;
+import Database.Dao.ExceptionDAO;
 import modulo.servidores.Entity.Estados;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoController {
